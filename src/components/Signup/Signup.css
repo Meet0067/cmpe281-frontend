@@ -1,0 +1,130 @@
+ 
+
+.signup-header {
+  height: 49px;
+  
+  
+}
+.signup-container {
+  line-height: 36px;
+  
+  font-size: 18px;
+  width: auto;
+  max-width: 600px;
+  margin-top: 50px;
+  padding-bottom: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+  
+
+  
+}
+.signup-container img.signup-img {
+  height: 200px;
+  width: 200px;
+  float: left;
+  
+  margin-right: 25px;
+  vertical-align: middle;
+
+  
+  margin: 0px 25px 0px 150px;
+}
+
+
+
+.container {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  
+  
+}
+.signup-container .signup-content {
+  float: left;
+  color: white;
+  max-width: 390px;
+  padding-left: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 15px;
+  background-color: black;
+  border-radius: 5px;
+  border-color: white;
+
+  
+  /* middle box */
+  
+}
+.signup-container .signup-content h2 {
+  text-transform: uppercase;
+  font-size: 16px;
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  line-height: 20px;
+  border-radius: 5px;
+  border-color: white;
+  background-color: orange;
+  
+}
+
+.signup-name-label {
+  font-size: 24px;
+  line-height: 140%;
+  margin: 16px 0 5px;
+  
+  border-radius: 5px;
+  border-color: white;
+
+  
+}
+.signup-container .signup-content input {
+  height: 42px;
+  width: 95%;
+  
+  border: 1px solid #cccccc;
+  padding: 4px;
+  margin-bottom: 17;
+  background-color: white;
+  border-radius: 5px;
+  border-color: white;
+}
+.signup-container .signup-content .signup-email-passwd input {
+  height: 40px;
+  width: 95%;
+  
+  border: 1px solid #cccccc;
+  padding: 2px;
+  margin-bottom: 17;
+  background-color: white;
+  border-radius: 5px;
+  border-color: white;
+}
+.signup-container .signup-btn {
+  margin-top: 20px;
+  color: black;
+  border-radius: 5px;
+  font-size: 24px;
+  width: auto;
+  text-shadow: 0 -1px 0 black;
+  box-sizing: content-box;
+  background-color: orange;
+}
+* {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;  
+ 
+  
+  
+}
+*:before,
+*:after {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  color : white;
+  
+}

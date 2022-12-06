@@ -1,0 +1,61 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+
+train_df = pd.read_csv("train.dat",header=None, delimiter=r"\s+", dtype=float)
+train = train_df.values
+
+train_labels_df = pd.read_csv("train.labels", header=None, delimiter=r"\s+", dtype=int)
+train_labels = np.concatenate(np.array(train_labels_df.values), axis=0)
+
+test_df = pd.read_csv("test.dat", header=None, delimiter=r"\s+", dtype=float)
+test = test_df.values
+
+from sklearn.decomposition import PCA# Make an instance of the Model
+pca = PCA(.95)
+pca.fit(train)
+train_img = pca.transform(train)
+test_img = pca.transform(test)
+
+from sklearn.utils import class_weight
+class_weights = class_weight.compute_class_weight(class_weight ='balanced',
+                                                 classes  = np.unique(train_labels),
+                                                 y = train_labels)
+weights = dict(zip(np.unique(np.subtract(train_labels,1)), class_weights))
+print(weights)
+
+from keras.models import Sequential,load_model
+from keras.layers import Dense, Dropout
+import keras.backend as K
+
+def get_f1(y_true, y_pred): #taken from old keras source code
+    true_positives = K.sum(K.round(K.clip(y_true * y_pred, 0, 1)))
+    possible_positives = K.sum(K.round(K.clip(y_true, 0, 1)))
+    predicted_positives = K.sum(K.round(K.clip(y_pred, 0, 1)))
+    precision = true_positives / (predicted_positives + K.epsilon())
+    recall = true_positives / (possible_positives + K.epsilon())
+    f1_val = 2*(precision*recall)/(precision+recall+K.epsilon())
+    return f1_val
+
+#Dependencies
+import keras
+from keras.models import Sequential
+from keras.layers import Dense# Neural network
+model = Sequential()
+model.add(Dense(1024, input_dim=8, activation="relu"))
+model.add(Dense(512, activation="relu"))
+model.add(Dense(256, activation="relu"))
+model.add(Dense(11, activation="softmax"))
+
+model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=[get_f1])
+model.fit(train_img, np.subtract(train_labels,1), epochs=50, batch_size=64, class_weight=weights)
+y_pred = model.predict(test_img)
+#Converting predictions to label
+pred = list()
+for i in range(len(y_pred)):
+    pred.append(np.argmax(y_pred[i]))
+
+    
+result = pd.DataFrame(pred)
+
+result.to_csv('prediction.dat',index=False,header=None)
